@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
+	"log"
+	"net"
 	"os"
 	"os/exec"
+	"strings"
 	"sync"
 
 	"github.com/infrasonar/go-libagent"
@@ -13,7 +15,15 @@ import (
 
 const checkNmapDefaultInterval = 14400
 
+var errTokenMissing = libagent.ErrMedium("environment variable 'NETWORK' is missing")
+var errAlreadyRunning = libagent.ErrLow("check is already running, please increase the nmap check interval")
+
 var lock sync.Mutex
+var scanProcess *exec.Cmd
+
+func endProcess() {
+	scanProcess = nil
+}
 
 func run(cmd *exec.Cmd) error {
 	// Get a pipe to read from standard out
@@ -47,24 +57,32 @@ func run(cmd *exec.Cmd) error {
 
 	// Wait for the command to finish
 	err = cmd.Wait()
+
 	return err
 }
 
 func CheckNmap(_ *libagent.Check) (map[string][]map[string]any, error) {
 	if !lock.TryLock() {
-		return nil, &libagent.CheckError{Sev: libagent.Low, Err: errors.New("check is already running, please increase the nmap check interval")}
+		return nil, errAlreadyRunning
 	}
 	defer lock.Unlock()
 
 	network := os.Getenv("NETWORK")
 	if network == "" {
-		return nil, errors.New("environment variable 'NETWORK' is missing")
+		return nil, errTokenMissing
+	}
+
+	if _, _, err := net.ParseCIDR(network); err != nil {
+		return nil, err
 	}
 
 	workFile := os.Getenv("TMP_XML_FILE")
 
-	cmd := exec.Command("nmap", "-sT", "-A", "-T4", "-oX", workFile, network)
-	if err := run(cmd); err != nil {
+	scanProcess = exec.Command("nmap", "-sT", "-A", "-T4", "-oX", workFile, network)
+	defer endProcess()
+
+	log.Printf("Run: %s", strings.Join(scanProcess.Args, " "))
+	if err := run(scanProcess); err != nil {
 		return nil, err
 	}
 
@@ -74,6 +92,5 @@ func CheckNmap(_ *libagent.Check) (map[string][]map[string]any, error) {
 	}
 
 	state := getState(scan)
-
 	return state, nil
 }

@@ -7,6 +7,11 @@ import (
 	"github.com/infrasonar/go-libagent"
 )
 
+func oneTime(check *libagent.Check, quit chan bool) {
+	check.Run()
+	quit <- true
+}
+
 func main() {
 	// Read arguments; as this discovery might start only once, it differs from
 	// other agents which are scheduled; (sets environment variable on success)
@@ -53,12 +58,9 @@ func main() {
 	}
 
 	if isDeamon() {
-		// Plan the check
 		go checkNmap.Plan(quit)
-
-		// Wait for quit
-		<-quit
 	} else {
-		checkNmap.Run()
+		go oneTime(&checkNmap, quit)
 	}
+	<-quit
 }

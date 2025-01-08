@@ -1,6 +1,6 @@
 github.com/akamensky/argparse v1.4.0 h1:YGzvsTqCvbEZhL8zZu2AiA5nq805NZh75JNj4ajn1xc=
 github.com/akamensky/argparse v1.4.0/go.mod h1:S5kwC7IuDcEr5VeXtGPRVZ5o/FdhcMlQz4IZQuw64xA=
-github.com/infrasonar/go-libagent v1.0.0 h1:vI1JhOkhXl4D7lKW1T2fTIXqK0n1aEIY8uBCVr1HymQ=
-github.com/infrasonar/go-libagent v1.0.0/go.mod h1:oUs+fBWez6cUZl4j7tk5CM/8dahBwLRvVg2J4l+Aue0=
+github.com/infrasonar/go-libagent v1.0.1 h1:VgXhMFp2VNx9mnejleM3mPXXHEweQdcApg7Z60jsnLM=
+github.com/infrasonar/go-libagent v1.0.1/go.mod h1:oUs+fBWez6cUZl4j7tk5CM/8dahBwLRvVg2J4l+Aue0=
 golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c h1:7dEasQXItcW1xKJ2+gg5VOiBnqWrJc+rq0DPKyvvdbY=
 golang.org/x/exp v0.0.0-20241009180824-f66d83c29e7c/go.mod h1:NQtJDoLvd6faHhE7m4T/1IY708gDefGGjR/iUW8yQQ8=
