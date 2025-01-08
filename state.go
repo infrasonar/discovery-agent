@@ -112,7 +112,7 @@ func getState(scan *NmapRun) map[string][]map[string]any {
 	state["ports"] = getAllPorts(&scan.Hosts)
 	state["agent"] = []map[string]any{{
 		"name":        "discovery",
-		"Version":     version,
+		"Version":     Version,
 		"NmapVersion": scan.Version,
 	}}
 	return state

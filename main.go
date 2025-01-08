@@ -15,7 +15,7 @@ func main() {
 	}
 
 	// Start collector
-	log.Printf("Starting InfraSonar Discovery Agent v%s\n", version)
+	log.Printf("Starting InfraSonar Discovery Agent v%s\n", Version)
 
 	// Initialize random
 	libagent.RandInit()
@@ -33,7 +33,7 @@ func main() {
 	go libagent.SigHandler(quit)
 
 	// Create Collector
-	collector := libagent.NewCollector("discovery", version)
+	collector := libagent.NewCollector("discovery", Version)
 
 	// Create Asset
 	asset := libagent.NewAsset(collector)

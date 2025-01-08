@@ -133,7 +133,7 @@ func parseArgs() error {
 	}
 
 	if *versionArg {
-		fmt.Printf("Version: %s\n", version)
+		fmt.Printf("Version: %s\n", Version)
 		os.Exit(0)
 	}
 
