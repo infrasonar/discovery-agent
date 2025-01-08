@@ -9,6 +9,8 @@ Documentation: https://docs.infrasonar.com/collectors/agents/discovery/
 
 Environment                 | Default                               | Description
 ----------------------------|---------------------------------------|-------------------
+`NETWORK`                   | _required_                            | Network to scan. For example `192.168.0.1/24`.
+`DEAMON`                    | `0`                                   | Start the agent as daemon when set to `1`. If not (`0`), the agent will run only once.
 `CONFIG_PATH`       		| `/etc/infrasonar` 			        | Path where configuration files are loaded and stored _(note: for a user, the `$HOME` path will be used instead of `/etc`)_
 `TOKEN`                     | _required_                            | Token used for authentication _(This MUST be a container token)_.
 `ASSET_NAME`                | _none_                                | Initial Asset Name. This will only be used at the announce. Once the asset is created, `ASSET_NAME` will be ignored.
