@@ -4,6 +4,33 @@ import (
 	"fmt"
 )
 
+func getAddress(host *Host) *Address {
+	for _, address := range host.Address {
+		if address.AddrType == "ipv4" {
+			return &address
+		}
+	}
+	for _, address := range host.Address {
+		if address.AddrType == "ipv6" {
+			return &address
+		}
+	}
+	for _, address := range host.Address {
+		if address.AddrType == "mac" {
+			return &address
+		}
+	}
+	for _, address := range host.Address {
+		return &address
+	}
+
+	// This basically cannot happen as the scanner always has an address
+	return &Address{
+		Addr:     "unknown",
+		AddrType: "unknown",
+	}
+}
+
 func getAssetName(host *Host) string {
 	for _, hostname := range host.Hostnames.Hostname {
 		if hostname.Type == "PTR" && hostname.Name != "" {
@@ -15,7 +42,7 @@ func getAssetName(host *Host) string {
 			return hostname.Name
 		}
 	}
-	return host.Address.Addr
+	return getAddress(host).Addr
 }
 
 func getPortsFromHost(host *Host) []int {
@@ -57,11 +84,12 @@ func getAssets(hosts *[]Host) []map[string]any {
 	var asset map[string]any
 
 	for _, host := range *hosts {
+		address := getAddress(&host)
 		asset = map[string]any{
-			"name":          host.Address.Addr,
+			"name":          address.Addr,
 			"Name":          getAssetName(&host),
-			"IpAddress":     host.Address.Addr,
-			"IpAddressType": host.Address.AddrType,
+			"IpAddress":     address.Addr,
+			"IpAddressType": address.AddrType,
 			"Ports":         getPortsFromHost(&host),
 			"OsType":        getOsType(&host),
 			"Services":      getServicesFromHost(&host),
