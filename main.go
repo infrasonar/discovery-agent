@@ -43,7 +43,7 @@ func main() {
 	// Create Asset
 	asset := libagent.NewAsset(collector)
 
-	// asset.Kind = "Linux"
+	asset.Kind = "Discovery"
 	asset.Announce()
 
 	checkNmap := libagent.Check{
