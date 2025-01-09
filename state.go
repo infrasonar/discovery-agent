@@ -5,6 +5,7 @@ import (
 )
 
 func getAddress(host *Host) *Address {
+	// Multiple address may exist
 	for _, address := range host.Address {
 		if address.AddrType == "ipv4" {
 			return &address
@@ -24,7 +25,7 @@ func getAddress(host *Host) *Address {
 		return &address
 	}
 
-	// This basically cannot happen as the scanner always has an address
+	// This should not happen as there always is an address
 	return &Address{
 		Addr:     "unknown",
 		AddrType: "unknown",
