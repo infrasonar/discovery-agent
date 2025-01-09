@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func getAssetName(host *Host) interface{} {
+func getAssetName(host *Host) string {
 	for _, hostname := range host.Hostnames.Hostname {
 		if hostname.Type == "PTR" && hostname.Name != "" {
 			return hostname.Name
@@ -15,7 +15,7 @@ func getAssetName(host *Host) interface{} {
 			return hostname.Name
 		}
 	}
-	return nil
+	return host.Address.Addr
 }
 
 func getPortsFromHost(host *Host) []int {

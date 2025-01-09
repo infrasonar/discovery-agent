@@ -9,6 +9,6 @@ func btoi(b bool) int {
 	return 0
 }
 
-func isDeamon() bool {
-	return !(os.Getenv("DEAMON") == "" || os.Getenv("DEAMON") == "0")
+func isDaemon() bool {
+	return !(os.Getenv("DAEMON") == "" || os.Getenv("DAEMON") == "0")
 }

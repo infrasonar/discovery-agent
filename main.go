@@ -57,7 +57,7 @@ func main() {
 		Fn:              CheckNmap,
 	}
 
-	if isDeamon() {
+	if isDaemon() {
 		go checkNmap.Plan(quit)
 	} else {
 		go oneTime(&checkNmap, quit)

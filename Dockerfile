@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /discovery-agent
 # Environment variable
 #   ENV NETWORK=<network>
 #   ENV TOKEN=<token>
-#   ENV DEAMON=0
+#   ENV DAEMON=0
 #   ENV CONFIG_PATH=/etc/infrasonar
 #   ENV ASSET_NAME=<asset name>
 #   ENV ASSET_ID=<asset id>
