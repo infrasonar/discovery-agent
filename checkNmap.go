@@ -41,7 +41,7 @@ func run(cmd *exec.Cmd) error {
 	go func() {
 		for scanner.Scan() {
 			line := scanner.Text()
-			fmt.Println(line)
+			fmt.Fprintln(os.Stderr, line)
 		}
 		done <- true
 	}()
