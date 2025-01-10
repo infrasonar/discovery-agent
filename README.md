@@ -19,7 +19,28 @@ Environment                 | Default                               | Descriptio
 `SKIP_VERIFY`				| _none_						        | Set to `1` or something else to skip certificate validation.
 `CHECK_NMAP_INTERVAL`       | `14400`                               | Interval in seconds for `namp` check or `0` to disable the check.
 
-## Build
+## Download
+
+- [Linux (amd64)](https://github.com/infrasonar/discovery-agent/releases/download/v1.0.0/discovery-agent-linux-amd64-1.0.0.tar.gz)
+- [Windows (amd64)](https://github.com/infrasonar/discovery-agent/releases/download/v1.0.0/discovery-agent-windows-amd64-1.0.0.tar.gz)
+- [Darwin (amd64)](https://github.com/infrasonar/discovery-agent/releases/download/v1.0.0/discovery-agent-darwin-amd64-1.0.0.tar.gz)
+- [Solaris (amd64)](https://github.com/infrasonar/discovery-agent/releases/download/v1.0.0/discovery-agent-solaris-amd64-1.0.0.tar.gz)
+
+> If your platform is not listed above, refer to the [build from source](#build-from-source) section for instructions.
+
+## Docker
+
+**Latest stable release**
+```
+docker pull ghcr.io/infrasonar/discovery-agent:latest
+```
+
+**Unstable release**
+```
+docker pull ghcr.io/infrasonar/discovery-agent:unstable
+```
+
+## Build from source
 ```
 CGO_ENABLED=0 go build -trimpath -o discovery-agent
 ```
