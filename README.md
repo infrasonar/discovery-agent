@@ -47,16 +47,6 @@ CGO_ENABLED=0 go build -trimpath -o discovery-agent
 
 ## Schedule
 
-Download the latest release from here:
-
-https://github.com/infrasonar/discovery-agent/releases/
-```
-
-Ensure the binary is executable:
-```
-chmod +x discovery-agent
-```
-
 Copy the binary to `/usr/sbin/infrasonar-discovery-agent`
 
 ```
